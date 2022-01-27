@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForBattleDate : ScriptableObject
+public class ForBattleDate : MonoBehaviour
 {
     public string name;
-    public Sprite Sprite;
     public enum Which
     {
         player,

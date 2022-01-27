@@ -7,6 +7,8 @@ TagManager:
   - treasure
   - npc
   - block
+  - SafeArea
+  - DangerArea
   layers:
   - Default
   - TransparentFX

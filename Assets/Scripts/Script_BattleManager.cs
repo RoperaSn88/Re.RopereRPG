@@ -10,10 +10,9 @@ public class Script_BattleManager : MonoBehaviour
     void Start()
     {
         phaseState = new StartPhase();
-        StartCoroutine(Battle());
     }
 
-    IEnumerator Battle()
+    public IEnumerator Battle()
     {
         while (!(phaseState is EndPhase))
         {

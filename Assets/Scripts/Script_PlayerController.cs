@@ -19,11 +19,18 @@ public class Script_PlayerController : MonoBehaviour
     public PlayerAttackPoint Left;
     public PlayerAttackPoint Up;
     public PlayerAttackPoint Down;
+    public GameObject BattleCanvas;
+    public GameObject Field_Canvas;
+    public List<GameObject> Enemys = new List<GameObject>();
+    Script_PlayerFieldAction PFA;
+    Script_BattleManager BM;
     // Start is called before the first frame update
     void Start()
     {
         PlayerAnimator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
+        PFA = GetComponent<Script_PlayerFieldAction>();
+        BM = GameObject.Find("BattleManager").GetComponent<Script_BattleManager>();
         FieldIF = true;
     }
 
@@ -100,5 +107,37 @@ public class Script_PlayerController : MonoBehaviour
             }
         }
     }
-    
+
+    void Battle()
+    {
+        controlF = false;
+        PlayerAnimator.SetBool("runF", false);
+        BattleCanvas.SetActive(true);
+        Field_Canvas.SetActive(false);
+        BM.Battle();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        {
+            if (other.gameObject.CompareTag("DangerArea"))
+            {
+                if (encount >= 100)
+                {
+                    Enemys.Clear();
+                    encount = 0;
+                    DangerAreaScript Entry = other.gameObject.GetComponent<DangerAreaScript>();
+                    int EntryEnemy = 1;
+                    while (EntryEnemy != 0)
+                    {
+                        GameObject Enemy = Entry.Enemys[Random.Range(0, Entry.Enemys.Count)];
+                        Enemys.Add(Enemy);
+                        EntryEnemy--;
+                    }
+                    Battle();
+                }
+            }
+        }
+    }
+
 }
