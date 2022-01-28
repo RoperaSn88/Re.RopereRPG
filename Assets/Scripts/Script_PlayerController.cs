@@ -13,6 +13,7 @@ public class Script_PlayerController : MonoBehaviour
     Transform myTransform;
     public GameObject Attack;
     public GameObject minicam;
+    public GameObject BattleM;
     public bool controlF = true;
     bool FieldIF = false;
     public PlayerAttackPoint Right;
@@ -30,7 +31,7 @@ public class Script_PlayerController : MonoBehaviour
         PlayerAnimator = GetComponent<Animator>();
         myTransform = GetComponent<Transform>();
         PFA = GetComponent<Script_PlayerFieldAction>();
-        BM = GameObject.Find("BattleManager").GetComponent<Script_BattleManager>();
+        BM = BattleM.GetComponent<Script_BattleManager>();
         FieldIF = true;
     }
 
@@ -45,7 +46,7 @@ public class Script_PlayerController : MonoBehaviour
         {
             if (Up.Hitting != true)
             {
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.UpArrow))
                 {
                     transform.position += new Vector3(0, 0, 3 * Time.deltaTime);
                     Encount();
@@ -53,7 +54,7 @@ public class Script_PlayerController : MonoBehaviour
             }
             if (Down.Hitting != true)
             {
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.DownArrow))
                 {
                     transform.position += new Vector3(0, 0, -3 * Time.deltaTime);
                     Encount();
@@ -62,7 +63,7 @@ public class Script_PlayerController : MonoBehaviour
 
             if (Right.Hitting != true)
             {
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.RightArrow))
                 {
                     transform.position += new Vector3(3 * Time.deltaTime, 0, 0);
                     myTransform.rotation = new Quaternion(0, 0, 0, 0);
@@ -72,7 +73,7 @@ public class Script_PlayerController : MonoBehaviour
 
             if (Left.Hitting != true)
             {
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     transform.position += new Vector3(-3 * Time.deltaTime, 0, 0);
                     myTransform.rotation = new Quaternion(0, 180, 0, 0);
@@ -81,7 +82,7 @@ public class Script_PlayerController : MonoBehaviour
             }
             
 
-            if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D) | Input.GetKey(KeyCode.S) | Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.UpArrow) | Input.GetKey(KeyCode.DownArrow) | Input.GetKey(KeyCode.RightArrow) | Input.GetKey(KeyCode.LeftArrow))
             {
                 PlayerAnimator.SetBool("runF", true);
             }
@@ -114,7 +115,7 @@ public class Script_PlayerController : MonoBehaviour
         PlayerAnimator.SetBool("runF", false);
         BattleCanvas.SetActive(true);
         Field_Canvas.SetActive(false);
-        BM.Battle();
+        BM.StartCoroutine("Battle");
     }
 
     private void OnTriggerStay(Collider other)

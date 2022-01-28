@@ -6,10 +6,15 @@ public class StartPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
-        yield return null;
-        battleContext.SetEnemy();
+        if (battleContext.CountEnemy == 1)
+        {
+            battleContext.windowLog.ShowLog("‚¾‚ê‚©‚ª‚ ‚ç‚í‚ê‚½!!");
+        }
         battleContext.windowBattleCommand.Open();
-        battleContext.windowLog.ShowLog("test");
+        
+        yield return new WaitForSeconds(2.5f);
+        
+        
         next = new CommandPhase();
 
     }
