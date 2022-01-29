@@ -9,6 +9,7 @@ TagManager:
   - block
   - SafeArea
   - DangerArea
+  - Enemy
   layers:
   - Default
   - TransparentFX

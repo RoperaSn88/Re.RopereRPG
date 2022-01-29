@@ -8,14 +8,20 @@ public class StartPhase : PhaseBase
     {
         if (battleContext.CountEnemy == 1)
         {
-            battleContext.windowLog.ShowLog("‚¾‚ê‚©‚ª‚ ‚ç‚í‚ê‚½!!");
+            foreach(GameObject enemy in battleContext.enemys)
+            {
+                ForBattleDate name = enemy.GetComponent<ForBattleDate>();
+                battleContext.windowLog.ShowLog($"{name.name}‚ª‚ ‚ç‚í‚ê‚½!!");
+            }
         }
-        battleContext.windowBattleCommand.Open();
-        
+        else
+        {
+            battleContext.windowLog.ShowLog($"“G‚ÌŒQ‚ê‚ª‚ ‚ç‚í‚ê‚½!!");
+        }
         yield return new WaitForSeconds(2.5f);
-        
-        
-        next = new CommandPhase();
+
+        battleContext.windowFirstCommand.Open();
+        next = new FirstSelectPhase();
 
     }
 }

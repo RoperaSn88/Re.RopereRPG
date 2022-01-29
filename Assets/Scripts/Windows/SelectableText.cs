@@ -16,7 +16,6 @@ public class SelectableText : Selectable
 
     public override void OnSelect(BaseEventData eventData)
     {
-        //base.OnSelect(eventData);
         OnSelectAction.Invoke(transform);
     }
     public override void OnDeselect(BaseEventData eventData)

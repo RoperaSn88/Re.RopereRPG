@@ -28,11 +28,6 @@ public class Script_WindowSelectCommands : MonoBehaviour
         }
     }
 
-    //SelectableText‚É
-    private void Start()
-    {
-        SetMoveArrowFunction();
-    }
 
     public void SetMoveArrowFunction()
     {

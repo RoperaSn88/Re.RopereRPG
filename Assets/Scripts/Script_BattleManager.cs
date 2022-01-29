@@ -26,6 +26,7 @@ public class Script_BattleManager : MonoBehaviour
                     battleContext.player2.Enemys.RemoveAt(0);
                     battleContext.CountEnemy++;
                 }
+                battleContext.enemys = GameObject.FindGameObjectsWithTag("Enemy");
             }
             
             yield return phaseState.Execute(battleContext);
@@ -47,9 +48,12 @@ public class Script_BattleManager : MonoBehaviour
         public Script_Battle player;
         public Script_PlayerController player2;
         public Script_Battle enemy;
+        public GameObject[] enemys;
         public int CountEnemy;
+        public bool canRun;
 
         // Window
+        public Script_WindowSelectCommands windowFirstCommand;
         public Script_WindowSelectCommands windowBattleCommand;
         public Script_WindowSelectCommands windowMagicCommand;
         public Script_WindowSelectCommands windowItemCommand;

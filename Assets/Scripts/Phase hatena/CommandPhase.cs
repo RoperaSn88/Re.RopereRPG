@@ -6,11 +6,12 @@ public class CommandPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
+        yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         int currentID = battleContext.windowBattleCommand.currentID;  //–îˆó‚ÌêŠ
         if (currentID == 0) //UŒ‚
         {
-            battleContext.player.SelectCommand = battleContext.player.commands[0];
+            
             next = new ExecutePhase();
         }
         else if (currentID == 1)
@@ -24,14 +25,6 @@ public class CommandPhase : PhaseBase
             {
                 next = new CommandItemPhase();
             }
-            else
-            {
-
-            }
-            
-        }
-        else
-        {
             
         }
 
