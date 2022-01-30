@@ -7,11 +7,12 @@ public class FirstSelectPhase : PhaseBase
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        int currentID = battleContext.windowBattleCommand.currentID;
+        int currentID = battleContext.windowFirstCommand.currentID;
         if (currentID == 0)
         {
             next = new CommandPhase();
             battleContext.windowFirstCommand.gameObject.SetActive(false);
+            battleContext.windowBattleCommand.Open();
         }
         if (currentID == 1)
         {
@@ -20,14 +21,16 @@ public class FirstSelectPhase : PhaseBase
         if (currentID == 2)
         {
             int random = Random.Range(0, 101);
-            if (random >= 20 && battleContext.canRun==false)
+            if (random >= 120 && battleContext.canRun==false)
             {
                 next = new EndPhase();
             }
             else
             {
                 battleContext.windowLog.ShowLog("“¦‚°‚é‚ÌŽ¸”s‚µ‚¿‚á‚Ÿ");
+                yield return new WaitForSeconds(0.1f);
                 battleContext.canRun = true;
+                next = new FirstSelectPhase();
             }
         }
     }

@@ -55,7 +55,6 @@ public class Script_Battle : MonoBehaviour
         {
             target = enemy;
         }
-        
     }
 
     //コマンドの対象選択

@@ -6,13 +6,23 @@ public class CommandPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitUntil();
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         int currentID = battleContext.windowBattleCommand.currentID;  //–îˆó‚ÌêŠ
         if (currentID == 0) //UŒ‚
         {
+            if (battleContext.CountEnemy >= 2)
+            {
+                yield return new WaitForSeconds(0.1f);
+                battleContext.windowTargetCommand.Open();
+                new SelectTargetPhase();
+            }
+            else
+            {
+                ForBattleDate InfoEnemy = battleContext.enemys[0].GetComponent<ForBattleDate>();
+                battleContext.player.target = InfoEnemy;
+            }
             
-            next = new ExecutePhase();
         }
         else if (currentID == 1)
         {

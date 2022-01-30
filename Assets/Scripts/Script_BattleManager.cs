@@ -45,18 +45,36 @@ public class Script_BattleManager : MonoBehaviour
     public struct BattleContext
     {
         // 戦闘キャラクターを作りたい
-        public Script_Battle player;
+        public ForBattleDate player;
         public Script_PlayerController player2;
-        public Script_Battle enemy;
+        public ForBattleDate enemy;
         public GameObject[] enemys;
+        public List<GameObject> listEnemy;
         public int CountEnemy;
         public bool canRun;
+
+
+        public string[] GetStringEnemys()
+        {
+            return GetString(listEnemy);
+        }
+
+        public string[] GetString(List<GameObject> listEnemy)
+        {
+            List<string> list = new List<string>();
+            foreach (GameObject enemy in listEnemy)
+            {
+                list.Add(enemy.name);
+            }
+            return list.ToArray();
+        }
 
         // Window
         public Script_WindowSelectCommands windowFirstCommand;
         public Script_WindowSelectCommands windowBattleCommand;
         public Script_WindowSelectCommands windowMagicCommand;
         public Script_WindowSelectCommands windowItemCommand;
+        public Script_WindowSelectCommands windowTargetCommand;
         public WindowLog windowLog;
         
     }
