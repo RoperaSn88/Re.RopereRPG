@@ -49,22 +49,16 @@ public class Script_BattleManager : MonoBehaviour
         public Script_PlayerController player2;
         public ForBattleDate enemy;
         public GameObject[] enemys;
-        public List<GameObject> listEnemy;
         public int CountEnemy;
         public bool canRun;
 
-
         public string[] GetStringEnemys()
         {
-            return GetString(listEnemy);
-        }
-
-        public string[] GetString(List<GameObject> listEnemy)
-        {
             List<string> list = new List<string>();
-            foreach (GameObject enemy in listEnemy)
+            foreach (GameObject SetEnemy in enemys)
             {
-                list.Add(enemy.name);
+                ForBattleDate NameDate = SetEnemy.GetComponent<ForBattleDate>();
+                list.Add(NameDate.name);
             }
             return list.ToArray();
         }

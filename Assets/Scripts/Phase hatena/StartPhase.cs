@@ -18,6 +18,7 @@ public class StartPhase : PhaseBase
         {
             battleContext.windowLog.ShowLog($"“G‚ÌŒQ‚ê‚ª‚ ‚ç‚í‚ê‚½!!");
         }
+
         yield return new WaitForSeconds(2.5f);
 
         battleContext.windowFirstCommand.Open();

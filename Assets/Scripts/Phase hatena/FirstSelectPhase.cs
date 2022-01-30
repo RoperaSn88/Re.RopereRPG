@@ -13,6 +13,7 @@ public class FirstSelectPhase : PhaseBase
             next = new CommandPhase();
             battleContext.windowFirstCommand.gameObject.SetActive(false);
             battleContext.windowBattleCommand.Open();
+            yield return new WaitForSeconds(0.1f);
         }
         if (currentID == 1)
         {

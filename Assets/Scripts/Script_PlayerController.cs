@@ -128,7 +128,7 @@ public class Script_PlayerController : MonoBehaviour
                     Enemys.Clear();
                     encount = 0;
                     DangerAreaScript Entry = other.gameObject.GetComponent<DangerAreaScript>();
-                    int EntryEnemy = Random.Range(1,4);
+                    int EntryEnemy = Random.Range(2,4);
                     while (EntryEnemy != 0)
                     {
                         GameObject Enemy = Entry.Enemys[Random.Range(0, Entry.Enemys.Count)];
