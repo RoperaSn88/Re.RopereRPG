@@ -6,6 +6,8 @@ public class CommandPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
+        
+        battleContext.player.enemys = battleContext.enemys;
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         int currentID = battleContext.windowBattleCommand.currentID;  //–îˆó‚ÌêŠ
         if (currentID == 0) //UŒ‚

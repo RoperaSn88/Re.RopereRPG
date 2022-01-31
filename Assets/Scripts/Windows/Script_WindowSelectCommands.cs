@@ -21,9 +21,25 @@ public class Script_WindowSelectCommands : MonoBehaviour
         selectableTexts.Clear();
         foreach(string command in commands)
         {
-            Debug.Log(command);
             SelectableText texts= Instantiate(selectableTextPrefab, transform);
             texts.SetText(command);
+            selectableTexts.Add(texts);
+        }
+    }
+
+    public void CreateSelectabletextForEnemy(GameObject[] Enemys)
+    {
+        arrow.SetParent(transform);
+        foreach (SelectableText selectableText in selectableTexts)
+        {
+            Destroy(selectableText.gameObject);
+        }
+        selectableTexts.Clear();
+        foreach (GameObject enemy in Enemys)
+        {
+            ForBattleDate NameDate = enemy.GetComponent<ForBattleDate>();
+            SelectableText texts = Instantiate(selectableTextPrefab, transform);
+            texts.SetText(NameDate.name);
             selectableTexts.Add(texts);
         }
     }

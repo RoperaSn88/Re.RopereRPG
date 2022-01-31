@@ -26,12 +26,24 @@ public class ForBattleDate : MonoBehaviour
         return GetString(commands);
     }
 
-    public List<string> items;
+
     public List<Script_commandSO> inventory = new List<Script_commandSO>();
     public string[] GetStringItems()
     {
         return GetString(inventory);
     }
+
+    public GameObject[] enemys;
+    public string[] GetStringEnemys()
+    {
+        List<string> list = new List<string>();
+        foreach (GameObject enemy in enemys)
+        {
+            list.Add(enemy.name);
+        }
+        return list.ToArray();
+    }
+
 
     public string[] GetString(List<Script_commandSO> commands)
     {

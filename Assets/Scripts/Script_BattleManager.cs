@@ -52,17 +52,7 @@ public class Script_BattleManager : MonoBehaviour
         public int CountEnemy;
         public bool canRun;
 
-        public string[] GetStringEnemys()
-        {
-            List<string> list = new List<string>();
-            foreach (GameObject SetEnemy in enemys)
-            {
-                ForBattleDate NameDate = SetEnemy.GetComponent<ForBattleDate>();
-                list.Add(NameDate.name);
-            }
-            return list.ToArray();
-        }
-
+        
         // Window
         public Script_WindowSelectCommands windowFirstCommand;
         public Script_WindowSelectCommands windowBattleCommand;
