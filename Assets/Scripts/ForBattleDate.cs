@@ -34,12 +34,14 @@ public class ForBattleDate : MonoBehaviour
     }
 
     public GameObject[] enemys;
+    public List<string> list = new List<string>();
     public string[] GetStringEnemys()
     {
-        List<string> list = new List<string>();
+        //List<string> list = new List<string>();
         foreach (GameObject enemy in enemys)
         {
-            list.Add(enemy.name);
+            ForBattleDate test = enemy.GetComponent<ForBattleDate>();
+            list.Add(test.name);
         }
         return list.ToArray();
     }

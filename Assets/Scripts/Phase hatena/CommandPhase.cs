@@ -38,9 +38,5 @@ public class CommandPhase : PhaseBase
             }
             
         }
-
-
-        //battleContext.windowLog.ShowLog(battleContext.enemy.name + "‚ª‚ ‚ç‚í‚ê‚½!");
-        
     }
 }

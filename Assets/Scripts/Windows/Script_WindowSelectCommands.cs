@@ -66,5 +66,8 @@ public class Script_WindowSelectCommands : MonoBehaviour
         currentID = 0;
         gameObject.SetActive(true);
         SetMoveArrowFunction();
+        
     }
+
+    
 }
