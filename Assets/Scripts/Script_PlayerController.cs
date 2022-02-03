@@ -100,7 +100,8 @@ public class Script_PlayerController : MonoBehaviour
         if (FieldIF == true)
         {
             
-            encount += Random.Range(1, 6);
+            //encount += Random.Range(1, 6);
+            encount += 10;
             if (encount >= 100)
             {
                 Debug.Log("ìGÇ∆èÑÇËçáÇ¡ÇΩ");
@@ -128,7 +129,7 @@ public class Script_PlayerController : MonoBehaviour
                     Enemys.Clear();
                     encount = 0;
                     DangerAreaScript Entry = other.gameObject.GetComponent<DangerAreaScript>();
-                    int EntryEnemy = Random.Range(2,4);
+                    int EntryEnemy = 1;
                     while (EntryEnemy != 0)
                     {
                         GameObject Enemy = Entry.Enemys[Random.Range(0, Entry.Enemys.Count)];

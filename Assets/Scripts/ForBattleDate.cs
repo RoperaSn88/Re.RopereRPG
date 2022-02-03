@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ForBattleDate : MonoBehaviour
 {
-    public string name;
+    public new string name;
     public enum Which
     {
         enemy,
@@ -15,6 +15,7 @@ public class ForBattleDate : MonoBehaviour
     public int hpmax;
     public int mp;
     public int AttackPoint;
+    public float CountTimer;
 
     public Script_commandSO SelectCommand;
     public ForBattleDate target;
@@ -71,6 +72,14 @@ public class ForBattleDate : MonoBehaviour
         else if (SelectCommand.Target == Script_commandSO.Targettype.Enemy)
         {
             target = enemy;
+        }
+    }
+
+    public void StartTimer()
+    {
+        while (hp <= 0)
+        {
+
         }
     }
 }

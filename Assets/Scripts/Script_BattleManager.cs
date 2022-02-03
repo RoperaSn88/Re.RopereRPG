@@ -7,6 +7,8 @@ public class Script_BattleManager : MonoBehaviour
     PhaseBase phaseState;
     [SerializeField] BattleContext battleContext;
     public List<GameObject> enemys = new List<GameObject>();
+    public GameObject BattleFieldCanvas;
+    public RectTransform EnemySpawnPoint;
 
     void Start()
     {
@@ -22,7 +24,8 @@ public class Script_BattleManager : MonoBehaviour
                 while (battleContext.player2.Enemys.Count != 0)
                 {
                     GameObject enemy = battleContext.player2.Enemys[0];
-                    Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
+                    GameObject Prefab= Instantiate(enemy, EnemySpawnPoint.position, Quaternion.identity);
+                    //Prefab.transform.SetParent(EnemySpawnPoint.transform, false);
                     battleContext.player2.Enemys.RemoveAt(0);
                     battleContext.CountEnemy++;
                 }

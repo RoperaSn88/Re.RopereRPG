@@ -12,6 +12,7 @@ public class StartPhase : PhaseBase
             {
                 ForBattleDate name = enemy.GetComponent<ForBattleDate>();
                 battleContext.windowLog.ShowLog($"{name.name}‚ª‚ ‚ç‚í‚ê‚½!!");
+                Debug.Log("aaaaaa");
             }
         }
         else
