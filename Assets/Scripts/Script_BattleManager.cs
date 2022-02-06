@@ -24,13 +24,17 @@ public class Script_BattleManager : MonoBehaviour
                 while (battleContext.player2.Enemys.Count != 0)
                 {
                     GameObject enemy = battleContext.player2.Enemys[0];
-                    GameObject Prefab= Instantiate(enemy, EnemySpawnPoint.position, Quaternion.identity);
-                    //Prefab.transform.SetParent(EnemySpawnPoint.transform, false);
+                    /*GameObject Prefab= Instantiate(enemy, EnemySpawnPoint.position, Quaternion.identity);
+                    Prefab.transform.SetParent(BattleFieldCanvas.transform, false);*/
                     battleContext.player2.Enemys.RemoveAt(0);
                     battleContext.CountEnemy++;
                 }
-                battleContext.enemys = GameObject.FindGameObjectsWithTag("Enemy");
+                //battleContext.enemys = GameObject.FindGameObjectsWithTag("Enemy");
+                battleContext.enemyObject = battleContext.player2.Enemy;
+                battleContext.enemyObject.SetActive(true);
+                battleContext.enemy = battleContext.enemyObject.GetComponent<ForBattleDate>();
             }
+
             
             yield return phaseState.Execute(battleContext);
 
@@ -52,6 +56,7 @@ public class Script_BattleManager : MonoBehaviour
         public Script_PlayerController player2;
         public ForBattleDate enemy;
         public GameObject[] enemys;
+        public GameObject enemyObject;
         public int CountEnemy;
         public bool canRun;
 

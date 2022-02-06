@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ForBattleDate : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class ForBattleDate : MonoBehaviour
     public int hp;
     public int hpmax;
     public int mp;
-    public int AttackPoint;
-    public float CountTimer;
+    public int BaseAttackPoint;
+    public int RandomAttackPoint;
+    public int BaseCountTimer;
+    float CountTimer;
 
+    public Script_BattleManager BM;
     public Script_commandSO SelectCommand;
     public ForBattleDate target;
     public ForBattleDate enemy;
@@ -75,11 +79,28 @@ public class ForBattleDate : MonoBehaviour
         }
     }
 
+    public Animator PlayerAnimator;
+    public void PlayAttackAnimator()
+    {
+        PlayerAnimator.SetTrigger("AttackT");
+    }
+
+    public Slider HPbar;
     public void StartTimer()
     {
-        while (hp <= 0)
+        HPbar.maxValue = hpmax;
+        CountTimer = BaseCountTimer;
+        while (hp >= 0)
         {
-
+            if (CountTimer > 0)
+            {
+                RandomAttackPoint = Random.Range(BaseAttackPoint - 2, BaseAttackPoint + 3);
+                target.hp -= RandomAttackPoint;
+                CountTimer = BaseCountTimer;
+                Debug.Log("çUåÇÇµÇΩÇÊ");
+            }
         }
     }
+
+
 }

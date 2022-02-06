@@ -23,6 +23,7 @@ public class Script_PlayerController : MonoBehaviour
     public GameObject BattleCanvas;
     public GameObject Field_Canvas;
     public List<GameObject> Enemys = new List<GameObject>();
+    public GameObject Enemy;
     Script_PlayerFieldAction PFA;
     Script_BattleManager BM;
     // Start is called before the first frame update
@@ -80,6 +81,7 @@ public class Script_PlayerController : MonoBehaviour
                     Encount();
                 }
             }
+
             
 
             if (Input.GetKey(KeyCode.UpArrow) | Input.GetKey(KeyCode.DownArrow) | Input.GetKey(KeyCode.RightArrow) | Input.GetKey(KeyCode.LeftArrow))
@@ -126,6 +128,7 @@ public class Script_PlayerController : MonoBehaviour
             {
                 if (encount >= 100)
                 {
+                    /*
                     Enemys.Clear();
                     encount = 0;
                     DangerAreaScript Entry = other.gameObject.GetComponent<DangerAreaScript>();
@@ -136,6 +139,12 @@ public class Script_PlayerController : MonoBehaviour
                         Enemys.Add(Enemy);
                         EntryEnemy--;
                     }
+                    Battle();
+                    */
+
+                    encount = 0;
+                    DangerAreaScript EnemyEntry = other.GetComponent<DangerAreaScript>();
+                    Enemy = EnemyEntry.Enemys[0];
                     Battle();
                 }
             }

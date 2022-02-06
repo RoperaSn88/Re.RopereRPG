@@ -6,12 +6,11 @@ public class CommandPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
-        
-        battleContext.player.enemys = battleContext.enemys;
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         int currentID = battleContext.windowBattleCommand.currentID;  //矢印の場所
         if (currentID == 0) //攻撃
         {
+            /*
             if (battleContext.CountEnemy >= 2)
             {
                 yield return new WaitForSeconds(0.1f);
@@ -23,7 +22,13 @@ public class CommandPhase : PhaseBase
                 ForBattleDate InfoEnemy = battleContext.enemys[0].GetComponent<ForBattleDate>();
                 battleContext.player.target = InfoEnemy;
             }
-            
+            */
+            //battleContext.player.SelectCommand=battleContext.player.
+            battleContext.player.RandomAttackPoint = Random.Range(battleContext.player.BaseAttackPoint - 2, battleContext.player.BaseAttackPoint + 3);
+            battleContext.enemy.hp -= battleContext.player.RandomAttackPoint;
+            battleContext.player.PlayAttackAnimator();
+            battleContext.windowLog.ShowLog($"{battleContext.enemy.name}に{battleContext.player.RandomAttackPoint}ダメージ");
+            next = new ExecutePhase();
         }
         else if (currentID == 1)
         {
@@ -35,6 +40,11 @@ public class CommandPhase : PhaseBase
             if (battleContext.player.inventory.Count >= 1)
             {
                 next = new CommandItemPhase();
+            }
+            else
+            {
+                battleContext.windowLog.ShowLog("アイテムをもってない");
+                next = new CommandPhase();
             }
             
         }

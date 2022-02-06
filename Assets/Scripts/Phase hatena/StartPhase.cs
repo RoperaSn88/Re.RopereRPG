@@ -6,6 +6,7 @@ public class StartPhase : PhaseBase
 {
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
+        /*
         if (battleContext.CountEnemy == 1)
         {
             foreach(GameObject enemy in battleContext.enemys)
@@ -18,9 +19,12 @@ public class StartPhase : PhaseBase
         else
         {
             battleContext.windowLog.ShowLog($"“G‚ÌŒQ‚ê‚ª‚ ‚ç‚í‚ê‚½!!");
-        }
+        } */
+        battleContext.enemy = battleContext.enemyObject.GetComponent<ForBattleDate>();
+        battleContext.enemy.target = battleContext.player;
+        battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ª‚ ‚ç‚í‚ê‚½!!");
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3.0f);
 
         battleContext.windowFirstCommand.Open();
         next = new FirstSelectPhase();

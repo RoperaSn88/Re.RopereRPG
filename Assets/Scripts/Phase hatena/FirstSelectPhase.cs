@@ -11,6 +11,7 @@ public class FirstSelectPhase : PhaseBase
         if (currentID == 0)
         {
             next = new CommandPhase();
+            battleContext.enemy.StartTimer();
             battleContext.windowFirstCommand.gameObject.SetActive(false);
             battleContext.windowBattleCommand.Open();
             yield return new WaitForSeconds(0.1f);
