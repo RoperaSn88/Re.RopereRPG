@@ -22,6 +22,8 @@ public class StartPhase : PhaseBase
         } */
         battleContext.enemy = battleContext.enemyObject.GetComponent<ForBattleDate>();
         battleContext.enemy.target = battleContext.player;
+        battleContext.enemy.SetHP();
+        
         battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ª‚ ‚ç‚í‚ê‚½!!");
 
         yield return new WaitForSeconds(3.0f);

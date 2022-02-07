@@ -86,18 +86,46 @@ public class ForBattleDate : MonoBehaviour
     }
 
     public Slider HPbar;
-    public void StartTimer()
+    public void SetHP()
     {
         HPbar.maxValue = hpmax;
+        HPbar.value = hp;
+    }
+
+    public Image Gage;
+    public Text Count;
+    public bool StartTF = false;
+   
+    public void StartTimer()
+    {
         CountTimer = BaseCountTimer;
-        while (hp >= 0)
+        StartTF = true;
+    }
+
+    public WindowLog Log;
+    public void Update()
+    {
+        if (StartTF == true)
         {
-            if (CountTimer > 0)
+            if (hp > 0)
             {
-                RandomAttackPoint = Random.Range(BaseAttackPoint - 2, BaseAttackPoint + 3);
-                target.hp -= RandomAttackPoint;
-                CountTimer = BaseCountTimer;
-                Debug.Log("攻撃したよ");
+                if (Gage.fillAmount > 0)
+                {
+                    Gage.fillAmount -= 1 * Time.deltaTime;
+                }
+                if (Gage.fillAmount == 0)
+                {
+                    CountTimer--;
+                    if (CountTimer == 0)
+                    {
+                        RandomAttackPoint = Random.Range(BaseAttackPoint - 2, BaseAttackPoint + 3);
+                        target.hp -= RandomAttackPoint;
+                        CountTimer = BaseCountTimer;
+                        Log.ShowLog($"{name}の攻撃！！{RandomAttackPoint}ダメージくらった");
+                    }
+                    Count.text = $"{CountTimer}";
+                    Gage.fillAmount = 1;
+                }
             }
         }
     }

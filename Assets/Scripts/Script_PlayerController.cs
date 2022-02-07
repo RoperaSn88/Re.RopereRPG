@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Script_PlayerController : MonoBehaviour
 {
-    public GameObject Camera;
+    public GameObject Cam;
     public GameObject Bikkuri;
     int encount = 0;
 
@@ -33,6 +33,7 @@ public class Script_PlayerController : MonoBehaviour
         myTransform = GetComponent<Transform>();
         PFA = GetComponent<Script_PlayerFieldAction>();
         BM = BattleM.GetComponent<Script_BattleManager>();
+        
         FieldIF = true;
     }
 
@@ -42,9 +43,10 @@ public class Script_PlayerController : MonoBehaviour
         Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
         minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
         //ÉJÉÅÉâÇÃà íuå≈íË
-        Camera.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
+        
         if (controlF == true)
         {
+            Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
             if (Up.Hitting != true)
             {
                 if (Input.GetKey(KeyCode.UpArrow))
@@ -118,8 +120,15 @@ public class Script_PlayerController : MonoBehaviour
         PlayerAnimator.SetBool("runF", false);
         BattleCanvas.SetActive(true);
         Field_Canvas.SetActive(false);
+        Transform CT = Cam.GetComponent<Transform>();
+        Camera CC = Cam.GetComponent<Camera>();
+        myTransform.rotation = new Quaternion(0, 180, 0, 0);
+        Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
+        CC.orthographicSize = CC.orthographicSize - 2.0f;
+        CT.position += new Vector3(-0.5f, 0, 0);
         BM.StartCoroutine("Battle");
     }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -141,10 +150,12 @@ public class Script_PlayerController : MonoBehaviour
                     }
                     Battle();
                     */
-
+                    controlF = false;
                     encount = 0;
                     DangerAreaScript EnemyEntry = other.GetComponent<DangerAreaScript>();
                     Enemy = EnemyEntry.Enemys[0];
+                    
+                    
                     Battle();
                 }
             }
