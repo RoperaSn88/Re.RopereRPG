@@ -153,7 +153,7 @@ public class Script_PlayerController : MonoBehaviour
                     controlF = false;
                     encount = 0;
                     DangerAreaScript EnemyEntry = other.GetComponent<DangerAreaScript>();
-                    Enemy = EnemyEntry.Enemys[0];
+                    Enemy = EnemyEntry.Enemys[Random.Range(0,EnemyEntry.Enemys.Count+1)];
                     
                     
                     Battle();

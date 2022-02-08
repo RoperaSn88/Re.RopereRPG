@@ -18,7 +18,7 @@ public class ForBattleDate : MonoBehaviour
     public int BaseAttackPoint;
     public int RandomAttackPoint;
     public int BaseCountTimer;
-    float CountTimer;
+    public int CountTimer;
 
     public Script_BattleManager BM;
     public Script_commandSO SelectCommand;
@@ -94,18 +94,19 @@ public class ForBattleDate : MonoBehaviour
 
     public Image Gage;
     public Text Count;
-    public bool StartTF = false;
+    bool StartF = false;
    
     public void StartTimer()
     {
         CountTimer = BaseCountTimer;
-        StartTF = true;
+        StartF = true;
     }
 
     public WindowLog Log;
+    public bool playerF = false;
     public void Update()
     {
-        if (StartTF == true)
+        if (StartF == true)
         {
             if (hp > 0)
             {
@@ -118,12 +119,33 @@ public class ForBattleDate : MonoBehaviour
                     CountTimer--;
                     if (CountTimer == 0)
                     {
-                        RandomAttackPoint = Random.Range(BaseAttackPoint - 2, BaseAttackPoint + 3);
+                        RandomAttackPoint = Random.Range(BaseAttackPoint - 1, BaseAttackPoint + 2);
                         target.hp -= RandomAttackPoint;
                         CountTimer = BaseCountTimer;
                         Log.ShowLog($"{name}の攻撃！！{RandomAttackPoint}ダメージくらった");
                     }
                     Count.text = $"{CountTimer}";
+                    Gage.fillAmount = 1;
+                }
+            }
+        }
+
+        if (playerF == true)
+        {
+            if (Gage.fillAmount > 0)
+            {
+                Gage.fillAmount -= 1 * Time.deltaTime;
+            }
+            if (Gage.fillAmount == 0)
+            {
+                CountTimer--;
+                Count.text = $"{CountTimer}";
+                if (CountTimer == 0)
+                {
+                    playerF = false;
+                }
+                else
+                {
                     Gage.fillAmount = 1;
                 }
             }

@@ -13,6 +13,10 @@ public class ExecutePhase : PhaseBase
         }
         else
         {
+            battleContext.enemy.HPbar.value = battleContext.enemy.hp;
+            battleContext.player.Count.text = $"{battleContext.player.CountTimer}";
+            battleContext.player.playerF = true;
+            yield return new WaitUntil(() => battleContext.player.CountTimer == 0);
             next = new CommandPhase();
             battleContext.windowBattleCommand.SetMoveArrowFunction();
         }

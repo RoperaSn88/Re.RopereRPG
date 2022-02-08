@@ -22,14 +22,14 @@ public class WindowLog : MonoBehaviour
     IEnumerator ShowChara(string message)
     {
         Writing = true;
-        message += "\n";
-        foreach(char c in message)
+        string SendMessage = '\n' + message;
+        foreach(char c in SendMessage)
         {
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.005f);
             if (c == '\n')
             {
                 LineCount++;
-                if (LineCount >= 3)
+                if (LineCount >= 7)
                 {
                     yield return MoveLine();
                 }
@@ -41,11 +41,11 @@ public class WindowLog : MonoBehaviour
 
     IEnumerator MoveLine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         int removePoint = LogText.text.IndexOf('\n') + 1;
         LogText.text = LogText.text.Substring(removePoint);
         LineCount--;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
     }
     public IEnumerator WaitWriting()
     {

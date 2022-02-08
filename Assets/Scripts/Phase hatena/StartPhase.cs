@@ -24,6 +24,7 @@ public class StartPhase : PhaseBase
         battleContext.enemy.target = battleContext.player;
         battleContext.enemy.SetHP();
         
+        battleContext.player.SetHP();
         battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ª‚ ‚ç‚í‚ê‚½!!");
 
         yield return new WaitForSeconds(3.0f);
