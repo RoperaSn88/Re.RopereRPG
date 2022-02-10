@@ -10,13 +10,10 @@ public class Script_BattleManager : MonoBehaviour
     public GameObject BattleFieldCanvas;
     public RectTransform EnemySpawnPoint;
 
-    void Start()
-    {
-        phaseState = new StartPhase();
-    }
 
     public IEnumerator Battle()
     {
+        phaseState = new StartPhase();
         while (!(phaseState is EndPhase))
         {
             if(phaseState is StartPhase)
@@ -43,8 +40,9 @@ public class Script_BattleManager : MonoBehaviour
 
         }
         yield return phaseState.Execute(battleContext);
-
+        Debug.Log("owata");
         yield break;
+        
     }
 
 

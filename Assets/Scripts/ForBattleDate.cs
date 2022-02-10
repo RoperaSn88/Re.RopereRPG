@@ -15,6 +15,9 @@ public class ForBattleDate : MonoBehaviour
     public int hp;
     public int hpmax;
     public int mp;
+    public int XP;
+    public int XPForLevel;
+    public int Level;
     public int BaseAttackPoint;
     public int RandomAttackPoint;
     public int BaseCountTimer;
@@ -101,7 +104,20 @@ public class ForBattleDate : MonoBehaviour
         CountTimer = BaseCountTimer;
         StartF = true;
     }
+    public void StopTimer()
+    {
+        StartF=false;
+    }
 
+    public void LevelUp()
+    {
+        BaseAttackPoint += 2;
+        hp += 5;
+        mp += 3;
+        Level += 1;
+        XP = XP - XPForLevel;
+        XPForLevel = XPForLevel * 2;
+    }
     public WindowLog Log;
     public bool playerF = false;
     public void Update()
@@ -122,6 +138,7 @@ public class ForBattleDate : MonoBehaviour
                         RandomAttackPoint = Random.Range(BaseAttackPoint - 1, BaseAttackPoint + 2);
                         target.hp -= RandomAttackPoint;
                         CountTimer = BaseCountTimer;
+                        target.SetHP();
                         Log.ShowLog($"{name}の攻撃！！{RandomAttackPoint}ダメージくらった");
                     }
                     Count.text = $"{CountTimer}";

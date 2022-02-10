@@ -8,7 +8,7 @@ using System;
 public class WindowLog : MonoBehaviour
 {
     Text LogText;
-    int LineCount;
+    public int LineCount;
     bool Writing = false;
 
     private void Awake()
@@ -19,13 +19,18 @@ public class WindowLog : MonoBehaviour
     {
         StartCoroutine(ShowChara(message));
     }
+    public void ClearLog()
+    {
+        LogText.text = "";
+    }
     IEnumerator ShowChara(string message)
     {
         Writing = true;
         string SendMessage = '\n' + message;
+        /*
         foreach(char c in SendMessage)
         {
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.02f);
             if (c == '\n')
             {
                 LineCount++;
@@ -36,7 +41,15 @@ public class WindowLog : MonoBehaviour
             }
             LogText.text += c;
         }
+        */
+        LogText.text += SendMessage;
+        LineCount++;
+        if (LineCount >= 5)
+        {
+            yield return MoveLine();
+        }
         Writing = false;
+        yield return null;
     }
 
     IEnumerator MoveLine()

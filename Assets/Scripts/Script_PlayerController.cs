@@ -7,8 +7,6 @@ public class Script_PlayerController : MonoBehaviour
     public GameObject Cam;
     public GameObject Bikkuri;
     int encount = 0;
-
-
     Animator PlayerAnimator;
     Transform myTransform;
     public GameObject Attack;
@@ -26,6 +24,8 @@ public class Script_PlayerController : MonoBehaviour
     public GameObject Enemy;
     Script_PlayerFieldAction PFA;
     Script_BattleManager BM;
+    public Transform CT;
+    public Camera CC;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,15 +33,20 @@ public class Script_PlayerController : MonoBehaviour
         myTransform = GetComponent<Transform>();
         PFA = GetComponent<Script_PlayerFieldAction>();
         BM = BattleM.GetComponent<Script_BattleManager>();
+        CT = Cam.GetComponent<Transform>();
+        CC=Cam.GetComponent<Camera>();
         
         FieldIF = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Awake()
     {
         Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
         minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
+    }
+    void Update()
+    {
+        
         //ÉJÉÅÉâÇÃà íuå≈íË
         
         if (controlF == true)
@@ -120,8 +125,7 @@ public class Script_PlayerController : MonoBehaviour
         PlayerAnimator.SetBool("runF", false);
         BattleCanvas.SetActive(true);
         Field_Canvas.SetActive(false);
-        Transform CT = Cam.GetComponent<Transform>();
-        Camera CC = Cam.GetComponent<Camera>();
+        
         myTransform.rotation = new Quaternion(0, 180, 0, 0);
         Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
         CC.orthographicSize = CC.orthographicSize - 2.0f;
@@ -153,7 +157,7 @@ public class Script_PlayerController : MonoBehaviour
                     controlF = false;
                     encount = 0;
                     DangerAreaScript EnemyEntry = other.GetComponent<DangerAreaScript>();
-                    Enemy = EnemyEntry.Enemys[Random.Range(0,EnemyEntry.Enemys.Count+1)];
+                    Enemy = EnemyEntry.Enemys[Random.Range(0,EnemyEntry.Enemys.Count)];
                     
                     
                     Battle();

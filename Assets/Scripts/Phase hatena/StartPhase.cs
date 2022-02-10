@@ -22,8 +22,13 @@ public class StartPhase : PhaseBase
         } */
         battleContext.enemy = battleContext.enemyObject.GetComponent<ForBattleDate>();
         battleContext.enemy.target = battleContext.player;
+        battleContext.enemy.CountTimer = battleContext.enemy.BaseCountTimer;
+        battleContext.enemy.Count.text = $"{battleContext.enemy.CountTimer}";
         battleContext.enemy.SetHP();
-        
+
+        battleContext.windowLog.ClearLog();
+        battleContext.windowLog.LineCount = 0;
+
         battleContext.player.SetHP();
         battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ª‚ ‚ç‚í‚ê‚½!!");
 
