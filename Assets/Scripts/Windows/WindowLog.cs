@@ -7,7 +7,7 @@ using System;
 
 public class WindowLog : MonoBehaviour
 {
-    Text LogText;
+    public Text LogText;
     public int LineCount;
     bool Writing = false;
 

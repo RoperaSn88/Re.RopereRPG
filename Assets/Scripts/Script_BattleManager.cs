@@ -66,6 +66,8 @@ public class Script_BattleManager : MonoBehaviour
         public Script_WindowSelectCommands windowItemCommand;
         public Script_WindowSelectCommands windowTargetCommand;
         public WindowLog windowLog;
+
+        public TextAnimation Battle;
         
     }
 

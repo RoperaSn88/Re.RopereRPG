@@ -10,11 +10,12 @@ public class FirstSelectPhase : PhaseBase
         int currentID = battleContext.windowFirstCommand.currentID;
         if (currentID == 0)
         {
+            battleContext.Battle.PlayAnimation();
+            yield return new WaitForSeconds(1.5f);
             next = new CommandPhase();
             battleContext.enemy.StartTimer();
             battleContext.windowFirstCommand.gameObject.SetActive(false);
             battleContext.windowBattleCommand.Open();
-            yield return new WaitForSeconds(0.1f);
         }
         if (currentID == 1)
         {

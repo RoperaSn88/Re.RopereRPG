@@ -37,12 +37,13 @@ public class Script_PlayerController : MonoBehaviour
         CC=Cam.GetComponent<Camera>();
         
         FieldIF = true;
+
+        Attack.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
     public void Awake()
     {
-        Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
-        minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
+        
     }
     void Update()
     {
@@ -52,6 +53,8 @@ public class Script_PlayerController : MonoBehaviour
         if (controlF == true)
         {
             Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
+            Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
+            minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
             if (Up.Hitting != true)
             {
                 if (Input.GetKey(KeyCode.UpArrow))
@@ -110,8 +113,8 @@ public class Script_PlayerController : MonoBehaviour
         {
             
             //encount += Random.Range(1, 6);
-            encount += 10;
-            if (encount >= 100)
+            encount += 1;
+            if (encount >= 150)
             {
                 Debug.Log("“G‚Æ„‚è‡‚Á‚½");
                 controlF = false;
