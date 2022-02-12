@@ -18,14 +18,19 @@ public class Script_PlayerController : MonoBehaviour
     public PlayerAttackPoint Left;
     public PlayerAttackPoint Up;
     public PlayerAttackPoint Down;
+    public PlayerAttackPoint Head;
+    public PlayerAttackPoint Asi;
     public GameObject BattleCanvas;
     public GameObject Field_Canvas;
     public List<GameObject> Enemys = new List<GameObject>();
     public GameObject Enemy;
     Script_PlayerFieldAction PFA;
     Script_BattleManager BM;
+    Rigidbody PR;
     public Transform CT;
     public Camera CC;
+    bool canLadder;
+    bool Ladding;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +40,7 @@ public class Script_PlayerController : MonoBehaviour
         BM = BattleM.GetComponent<Script_BattleManager>();
         CT = Cam.GetComponent<Transform>();
         CC=Cam.GetComponent<Camera>();
+        PR=GetComponent<Rigidbody>();
         
         FieldIF = true;
 
@@ -55,52 +61,103 @@ public class Script_PlayerController : MonoBehaviour
             Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
             Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
             minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
-            if (Up.Hitting != true)
+            if (Ladding == false)
             {
+                PR.useGravity = true;
+                if (Up.Hitting != true)//ふぃーるどアクション
+                {
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        transform.position += new Vector3(0, 0, 3 * Time.deltaTime);
+                        Encount();
+                    }
+                }
+                if (Down.Hitting != true)
+                {
+                    if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        transform.position += new Vector3(0, 0, -3 * Time.deltaTime);
+                        Encount();
+                    }
+                }
+
+                if (Right.Hitting != true)
+                {
+                    if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        transform.position += new Vector3(3 * Time.deltaTime, 0, 0);
+                        myTransform.rotation = new Quaternion(0, 0, 0, 0);
+                        Encount();
+                    }
+                }
+
+                if (Left.Hitting != true)
+                {
+                    if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        transform.position += new Vector3(-3 * Time.deltaTime, 0, 0);
+                        myTransform.rotation = new Quaternion(0, 180, 0, 0);
+                        Encount();
+                    }
+                }
+
+                if (Input.GetKey(KeyCode.UpArrow) | Input.GetKey(KeyCode.DownArrow) | Input.GetKey(KeyCode.RightArrow) | Input.GetKey(KeyCode.LeftArrow))
+                {
+                    PlayerAnimator.SetBool("runF", true);
+                }
+                else
+                {
+                    PlayerAnimator.SetBool("runF", false);
+                }
+
+                if (canLadder == true)
+                {
+                    Bikkuri.SetActive(true);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        if (Ladding == false)
+                        {
+                            Ladding = true;
+                        }
+                        else
+                        {
+                            Ladding = false;
+                        }
+                    }
+                }
+                else
+                {
+                    Bikkuri.SetActive(false);
+                }
+
+                PlayerAnimator.SetBool("LadderF", false);
+            }
+            else //はしごアクション
+            {
+                PR.useGravity = false;
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    transform.position += new Vector3(0, 0, 3 * Time.deltaTime);
-                    Encount();
+                    if (Head.Hitting != true)
+                    {
+                        transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+                        
+                    } 
                 }
-            }
-            if (Down.Hitting != true)
-            {
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    transform.position += new Vector3(0, 0, -3 * Time.deltaTime);
-                    Encount();
+                    if (Asi.Hitting != true)
+                    {
+                        transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                    }
                 }
-            }
 
-            if (Right.Hitting != true)
-            {
-                if (Input.GetKey(KeyCode.RightArrow))
+                PlayerAnimator.SetBool("LadderF", true);
+
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    transform.position += new Vector3(3 * Time.deltaTime, 0, 0);
-                    myTransform.rotation = new Quaternion(0, 0, 0, 0);
-                    Encount();
+                    Ladding = false;
                 }
-            }
-
-            if (Left.Hitting != true)
-            {
-                if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    transform.position += new Vector3(-3 * Time.deltaTime, 0, 0);
-                    myTransform.rotation = new Quaternion(0, 180, 0, 0);
-                    Encount();
-                }
-            }
-
-            
-
-            if (Input.GetKey(KeyCode.UpArrow) | Input.GetKey(KeyCode.DownArrow) | Input.GetKey(KeyCode.RightArrow) | Input.GetKey(KeyCode.LeftArrow))
-            {
-                PlayerAnimator.SetBool("runF", true);
-            }
-            else
-            {
-                PlayerAnimator.SetBool("runF", false);
+                Bikkuri.SetActive(false);
             }
         }
 
@@ -112,8 +169,8 @@ public class Script_PlayerController : MonoBehaviour
         if (FieldIF == true)
         {
             
-            //encount += Random.Range(1, 6);
-            encount += 1;
+            encount += Random.Range(2, 5);
+            
             if (encount >= 150)
             {
                 Debug.Log("敵と巡り合った");
@@ -166,6 +223,22 @@ public class Script_PlayerController : MonoBehaviour
                     Battle();
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            canLadder = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            canLadder = false;
         }
     }
 

@@ -12,15 +12,16 @@ public class EndPhase : PhaseBase
         battleContext.windowLog.ShowLog($"{battleContext.enemy.XP}の経験値入った");
         battleContext.windowLog.ShowLog("スペースで次へ");
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        /*
+        
         if (battleContext.player.XP >= battleContext.player.XPForLevel)
         {
-            battleContext.windowLog.ShowLog($"レベル挙がったよ");
+            battleContext.windowLog.ShowLog($"レベル挙がったよ。回復したよ。");
             battleContext.windowLog.ShowLog("スペースで次へ");
             battleContext.player.LevelUp();
+            yield return new WaitForSeconds(0.2f);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         }
-        */
+        
         battleContext.windowBattleCommand.gameObject.SetActive(false);
         battleContext.windowLog.ClearLog();
         battleContext.player2.BattleCanvas.SetActive(false);

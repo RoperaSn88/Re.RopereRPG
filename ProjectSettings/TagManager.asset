@@ -10,6 +10,7 @@ TagManager:
   - SafeArea
   - DangerArea
   - Enemy
+  - Ladder
   layers:
   - Default
   - TransparentFX

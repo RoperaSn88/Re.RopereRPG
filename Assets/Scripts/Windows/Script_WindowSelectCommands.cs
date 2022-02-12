@@ -51,7 +51,6 @@ public class Script_WindowSelectCommands : MonoBehaviour
         {
             selectableText.OnSelectAction = Movearrow;
         }
-
         EventSystem.current.SetSelectedGameObject(selectableTexts[currentID].gameObject);
     }
 
@@ -66,7 +65,6 @@ public class Script_WindowSelectCommands : MonoBehaviour
         currentID = 0;
         gameObject.SetActive(true);
         SetMoveArrowFunction();
-        
     }
 
     

@@ -112,7 +112,9 @@ public class ForBattleDate : MonoBehaviour
     public void LevelUp()
     {
         BaseAttackPoint += 2;
-        hp += 5;
+        hpmax = hpmax * 2;
+        hp = hpmax;
+        SetHP();
         mp += 3;
         Level += 1;
         XP = XP - XPForLevel;
