@@ -19,8 +19,7 @@ public class CommandMagicPhase : PhaseBase
             battleContext.player.SelectCommand = battleContext.player.commands[currentID];
             //TargetÇÃê›íË
             battleContext.player.SetTarget();
-            battleContext.enemy.SelectCommand = battleContext.enemy.commands[0];
-            battleContext.enemy.SetTarget();
+            battleContext.player.SelectCommand.Execute(battleContext.player, battleContext.player.target,battleContext.windowLog);
             next = new ExecutePhase();
             battleContext.windowMagicCommand.gameObject.SetActive(false);
         }

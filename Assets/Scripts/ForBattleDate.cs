@@ -23,6 +23,16 @@ public class ForBattleDate : MonoBehaviour
     public int BaseCountTimer;
     public int CountTimer;
 
+    public bool playerF = false;
+    public bool EnhanceF = false;
+    public Image EnhanceImage;
+    public Text EnhanceText;
+    int EnhanceTime;
+    public bool SpeedF = false;
+    public Image SpeedImage;
+    public Text SpeedText;
+    int SpeedTime;
+
     public Script_BattleManager BM;
     public Script_commandSO SelectCommand;
     public ForBattleDate target;
@@ -41,6 +51,7 @@ public class ForBattleDate : MonoBehaviour
         return GetString(inventory);
     }
 
+    /*
     public GameObject[] enemys;
     public List<string> list = new List<string>();
     public string[] GetStringEnemys()
@@ -53,7 +64,7 @@ public class ForBattleDate : MonoBehaviour
         }
         return list.ToArray();
     }
-
+    */
 
     public string[] GetString(List<Script_commandSO> commands)
     {
@@ -121,7 +132,27 @@ public class ForBattleDate : MonoBehaviour
         XPForLevel = XPForLevel * 2;
     }
     public WindowLog Log;
-    public bool playerF = false;
+    
+    public void StartEnhance()
+    {
+        EnhanceImage.gameObject.SetActive(true);
+        EnhanceF = true;
+        EnhanceTime = 18;
+        EnhanceText.text = "18";
+        EnhanceImage.fillAmount = 1;
+        Log.ShowLog($"—Í‚ª‚Ý‚È‚¬‚é...!!");
+    }
+
+    public void StartSpeed()
+    {
+        SpeedImage.gameObject.SetActive(true);
+        SpeedF = true;
+        SpeedTime = 28;
+        SpeedText.text = "28";
+        SpeedImage.fillAmount = 1;
+        Log.ShowLog($"‘Ì‚ªŒy‚­Š´‚¶‚é...!!");
+    }
+
     public void Update()
     {
         if (StartF == true)
@@ -168,6 +199,54 @@ public class ForBattleDate : MonoBehaviour
                     Gage.fillAmount = 1;
                 }
             }
+        }
+
+        if (EnhanceF == true)
+        {
+            if (EnhanceImage.fillAmount > 0)
+            {
+                EnhanceImage.fillAmount -= 1 * Time.deltaTime;
+            }
+            if (EnhanceImage.fillAmount == 0)
+            {
+                EnhanceTime--;
+                EnhanceText.text = $"{EnhanceTime}";
+                if (EnhanceTime == 0)
+                {
+                    EnhanceF = false;
+                    EnhanceImage.gameObject.SetActive(false);
+                }
+                else
+                {
+                    EnhanceImage.fillAmount = 1;
+                }
+
+            }
+
+        }
+
+        if (SpeedF == true)
+        {
+            if (SpeedImage.fillAmount > 0)
+            {
+                SpeedImage.fillAmount -= 1 * Time.deltaTime;
+            }
+            if (SpeedImage.fillAmount == 0)
+            {
+                SpeedTime--;
+                SpeedText.text = $"{SpeedTime}";
+                if (SpeedTime == 0)
+                {
+                    SpeedF = false;
+                    SpeedImage.gameObject.SetActive(false);
+                }
+                else
+                {
+                    SpeedImage.fillAmount = 1;
+                }
+
+            }
+
         }
     }
 

@@ -7,7 +7,7 @@ public class SCript_attackcommandSO : Script_commandSO
 {
     [SerializeField] new int AttackPoint;
 
-    public override void Execute(Script_Battle user, Script_Battle target)
+    public override void Execute(ForBattleDate user, ForBattleDate target, WindowLog Log)
     {
         target.hp -= AttackPoint;
         

@@ -19,10 +19,6 @@ public class FirstSelectPhase : PhaseBase
         }
         if (currentID == 1)
         {
-
-        }
-        if (currentID == 2)
-        {
             int random = Random.Range(0, 101);
             if (random >= 80 && battleContext.canRun==false)
             {

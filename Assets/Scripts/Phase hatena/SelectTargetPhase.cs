@@ -7,7 +7,7 @@ public class SelectTargetPhase : PhaseBase
     public override IEnumerator Execute(Script_BattleManager.BattleContext battleContext)
     {
         yield return null;
-        battleContext.windowTargetCommand.CreateSelectabletextForEnemy(battleContext.player.enemys);
+        //battleContext.windowTargetCommand.CreateSelectabletextForEnemy(battleContext.player.enemys);
         battleContext.windowTargetCommand.Open();
         battleContext.windowTargetCommand.currentID = 0;
 

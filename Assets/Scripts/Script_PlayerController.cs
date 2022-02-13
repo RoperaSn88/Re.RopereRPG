@@ -59,7 +59,7 @@ public class Script_PlayerController : MonoBehaviour
         if (controlF == true)
         {
             Cam.transform.position = new Vector3(myTransform.position.x, myTransform.position.y + 1.5f, myTransform.position.z - 3f);
-            Attack.transform.rotation = Quaternion.Euler(0, 0, 0);
+            Attack.transform.rotation= Quaternion.Euler(0, 0, 0);
             minicam.transform.rotation = Quaternion.Euler(90, 0, 0);
             if (Ladding == false)
             {

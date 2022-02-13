@@ -26,7 +26,7 @@ public class Script_WindowSelectCommands : MonoBehaviour
             selectableTexts.Add(texts);
         }
     }
-
+    /*
     public void CreateSelectabletextForEnemy(GameObject[] Enemys)
     {
         arrow.SetParent(transform);
@@ -43,7 +43,7 @@ public class Script_WindowSelectCommands : MonoBehaviour
             selectableTexts.Add(texts);
         }
     }
-
+    */
 
     public void SetMoveArrowFunction()
     {

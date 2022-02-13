@@ -12,6 +12,16 @@ public class ExecutePhase : PhaseBase
             battleContext.enemy.gameObject.SetActive(false);
             battleContext.enemy.StopTimer();
             battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ð“|‚µ‚½");
+
+            battleContext.player.EnhanceF = false;
+            battleContext.player.EnhanceImage.fillAmount = 0;
+            battleContext.player.EnhanceText.text = "0";
+            battleContext.player.EnhanceImage.gameObject.SetActive(false);
+
+            battleContext.player.SpeedF = false;
+            battleContext.player.SpeedImage.fillAmount = 0;
+            battleContext.player.SpeedText.text = "0";
+            battleContext.player.SpeedImage.gameObject.SetActive(false);
             yield return new WaitForSeconds(2);
             next = new EndPhase();
         }

@@ -6,17 +6,17 @@ using UnityEngine;
 public class Script_commandSO : ScriptableObject
 {
     public new string name;
+    public int UseMP;
     public enum Targettype
     {
         Self,
         Enemy,
     }
     public Targettype Target;
-    
+    public int CoolTime;
 
-    public virtual void Execute(Script_Battle user,Script_Battle target)
+    public virtual void Execute(ForBattleDate user,ForBattleDate target,WindowLog Log)
     {
-        //target.hp -= at;
-        //Debug.Log($"{user.name}‚ÌUŒ‚:{target.name}‚É3‚Ìƒ_ƒ[ƒW");
+        Debug.Log("command!?!?!?");
     }
 }

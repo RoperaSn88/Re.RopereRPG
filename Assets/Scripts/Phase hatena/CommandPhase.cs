@@ -25,9 +25,20 @@ public class CommandPhase : PhaseBase
             */
             //battleContext.player.SelectCommand=battleContext.player.
             battleContext.player.RandomAttackPoint = Random.Range(battleContext.player.BaseAttackPoint - 2, battleContext.player.BaseAttackPoint + 3);
+            if (battleContext.player.EnhanceF == true)
+            {
+                battleContext.player.RandomAttackPoint = battleContext.player.RandomAttackPoint * 2;
+            }
             battleContext.enemy.hp -= battleContext.player.RandomAttackPoint;
             battleContext.player.PlayAttackAnimator();
-            battleContext.player.CountTimer = 3;
+            if (battleContext.player.SpeedF == true)
+            {
+                battleContext.player.CountTimer = 1;
+            }
+            else
+            {
+                battleContext.player.CountTimer = 3;
+            }
             battleContext.windowLog.ShowLog($"{battleContext.enemy.name}Ç…{battleContext.player.RandomAttackPoint}É_ÉÅÅ[ÉW");
             next = new ExecutePhase();
         }

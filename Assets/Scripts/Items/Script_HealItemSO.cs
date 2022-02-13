@@ -6,7 +6,7 @@ using UnityEngine;
 public class Script_HealItemSO : Script_commandSO
 {
     [SerializeField] int HealPoint;
-    public override void Execute(Script_Battle user, Script_Battle target)
+    public override void Execute(ForBattleDate user, ForBattleDate target, WindowLog Log)
     {
         target.hp += HealPoint;
         Debug.Log($"{name}‚ðŽg—p");
