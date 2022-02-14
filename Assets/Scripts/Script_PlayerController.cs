@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Script_PlayerController : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Script_PlayerController : MonoBehaviour
     Script_PlayerFieldAction PFA;
     Script_BattleManager BM;
     Rigidbody PR;
+    AreaScript AreaDate;
+    public Text AreaName;
     public Transform CT;
     public Camera CC;
     bool canLadder;
@@ -179,6 +182,11 @@ public class Script_PlayerController : MonoBehaviour
         }
     }
 
+    void AreaDateText()
+    {
+        AreaName.text = AreaDate.AreaName;
+    }
+
     void Battle()
     {
         controlF = false;
@@ -231,6 +239,18 @@ public class Script_PlayerController : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             canLadder = true;
+        }
+        if (other.CompareTag("SafeArea"))
+        {
+            FieldIF = false;
+            AreaDate=other.GetComponent<AreaScript>();
+            AreaDateText();
+        }
+        if (other.CompareTag("DangerArea"))
+        {
+            FieldIF = true;
+            AreaDate = other.GetComponent<AreaScript>();
+            AreaDateText();
         }
     }
 

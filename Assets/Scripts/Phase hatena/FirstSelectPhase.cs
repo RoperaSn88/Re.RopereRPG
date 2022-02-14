@@ -20,9 +20,12 @@ public class FirstSelectPhase : PhaseBase
         if (currentID == 1)
         {
             int random = Random.Range(0, 101);
-            if (random >= 80 && battleContext.canRun==false)
+            if (random >= 50 && battleContext.canRun==false)
             {
+                battleContext.enemy.gameObject.SetActive(false);
                 battleContext.windowLog.ShowLog("ì¶Ç∞ÇÈÇÃÇ…ê¨å˜ÇµÇΩ");
+                yield return new WaitForSeconds(2);
+                battleContext.Ran = true;
                 next = new EndPhase();
             }
             else

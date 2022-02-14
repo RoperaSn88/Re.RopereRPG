@@ -57,6 +57,7 @@ public class Script_BattleManager : MonoBehaviour
         public GameObject enemyObject;
         public int CountEnemy;
         public bool canRun;
+        public bool Ran;
 
         
         // Window
