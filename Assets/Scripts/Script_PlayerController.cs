@@ -34,6 +34,7 @@ public class Script_PlayerController : MonoBehaviour
     public Camera CC;
     bool canLadder;
     bool Ladding;
+    bool TestB;
     // Start is called before the first frame update
     void Start()
     {
@@ -164,6 +165,17 @@ public class Script_PlayerController : MonoBehaviour
             }
         }
 
+        if (TestB == true)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                controlF = false;
+                encount = 0;
+                TestB = false;
+                Battle();
+            }
+        }
+
         Debug.Log($"encount:{encount}");
     }
 
@@ -252,6 +264,12 @@ public class Script_PlayerController : MonoBehaviour
             AreaDate = other.GetComponent<AreaScript>();
             AreaDateText();
         }
+        if (other.CompareTag("TestB"))
+        {
+            TestB = true;
+            DangerAreaScript EnemyEntry = other.GetComponent<DangerAreaScript>();
+            Enemy = EnemyEntry.Enemys[Random.Range(0, EnemyEntry.Enemys.Count)];
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -259,6 +277,10 @@ public class Script_PlayerController : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             canLadder = false;
+        }
+        if (other.CompareTag("TestB"))
+        {
+            TestB = false;
         }
     }
 

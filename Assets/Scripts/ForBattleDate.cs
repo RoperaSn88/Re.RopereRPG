@@ -169,6 +169,10 @@ public class ForBattleDate : MonoBehaviour
                     if (CountTimer == 0)
                     {
                         RandomAttackPoint = Random.Range(BaseAttackPoint - 1, BaseAttackPoint + 2);
+                        if (RandomAttackPoint <= 0)
+                        {
+                            RandomAttackPoint = 0;
+                        }
                         target.hp -= RandomAttackPoint;
                         CountTimer = BaseCountTimer;
                         target.SetHP();

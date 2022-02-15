@@ -11,6 +11,7 @@ TagManager:
   - DangerArea
   - Enemy
   - Ladder
+  - TestB
   layers:
   - Default
   - TransparentFX

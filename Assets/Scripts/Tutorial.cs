@@ -33,9 +33,9 @@ public class Tutorial : MonoBehaviour
 
             }
             
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyUp(KeyCode.X))
             {
-                if (number == 6)
+                if (number == 8)
                 {
                     End = true;
                 }
@@ -47,6 +47,7 @@ public class Tutorial : MonoBehaviour
 
             }
         }
+        Images[number].SetActive(false);
 
         Debug.Log("asasa");
         yield break;
