@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ForBattleDate : MonoBehaviour
 {
@@ -22,8 +23,11 @@ public class ForBattleDate : MonoBehaviour
     public int RandomAttackPoint;
     public int BaseCountTimer;
     public int CountTimer;
+    public bool boss;
+    public AudioSource FightingSound;
 
     public bool playerF = false;
+    public Text PlayerHPText;
     public bool EnhanceF = false;
     public Image EnhanceImage;
     public Text EnhanceText;
@@ -123,13 +127,13 @@ public class ForBattleDate : MonoBehaviour
     public void LevelUp()
     {
         BaseAttackPoint += 2;
-        hpmax = hpmax * 2;
+        hpmax = hpmax +10;
         hp = hpmax;
         SetHP();
         mp += 3;
         Level += 1;
         XP = XP - XPForLevel;
-        XPForLevel = XPForLevel * 2;
+        XPForLevel = Level * 2 + 16;
     }
     public WindowLog Log;
     
@@ -176,7 +180,16 @@ public class ForBattleDate : MonoBehaviour
                         target.hp -= RandomAttackPoint;
                         CountTimer = BaseCountTimer;
                         target.SetHP();
+                        target.PlayerHPText.text=$"{target.hp}/{target.hpmax}";
+                        FightingSound.Play();
                         Log.ShowLog($"{name}の攻撃！！{RandomAttackPoint}ダメージくらった");
+                        if (target.hp <= 0)
+                        {
+                            Animator PlayerDeath = target.GetComponent<Animator>();
+                            PlayerDeath.SetTrigger("Death");
+                            target.playerF = false;
+                            BM.StartCoroutine("Gameover");
+                        }
                     }
                     Count.text = $"{CountTimer}";
                     Gage.fillAmount = 1;

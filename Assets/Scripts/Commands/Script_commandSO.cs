@@ -7,6 +7,7 @@ public class Script_commandSO : ScriptableObject
 {
     public new string name;
     public int UseMP;
+    public AudioClip FightSound;
     public enum Targettype
     {
         Self,

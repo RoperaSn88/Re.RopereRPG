@@ -24,12 +24,14 @@ public class StartPhase : PhaseBase
         battleContext.enemy.target = battleContext.player;
         battleContext.enemy.CountTimer = battleContext.enemy.BaseCountTimer;
         battleContext.enemy.Count.text = $"{battleContext.enemy.CountTimer}";
+        battleContext.enemy.Gage.fillAmount = 1;
         battleContext.enemy.SetHP();
 
         battleContext.windowLog.ClearLog();
         battleContext.windowLog.LineCount = 0;
 
         battleContext.player.SetHP();
+        battleContext.player.PlayerHPText.text = $"{battleContext.player.hp}/{battleContext.player.hpmax}";
         battleContext.windowLog.ShowLog($"{battleContext.enemy.name}‚ª‚ ‚ç‚í‚ê‚½!!");
 
         yield return new WaitForSeconds(3.0f);

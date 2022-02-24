@@ -35,6 +35,16 @@ public class Script_PlayerController : MonoBehaviour
     bool canLadder;
     bool Ladding;
     bool TestB;
+    bool BossF;
+    public Script_WindowSelectCommands ChooseLog;
+    public WindowLog FieldLog;
+
+    public AudioSource FieldMusic;
+    public AudioSource ForBattleMusic;
+    public AudioSource FightingMusic;
+    public AudioSource CuttingSound;
+    public AudioSource OTOKO;
+    public AudioSource MagicSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -167,16 +177,20 @@ public class Script_PlayerController : MonoBehaviour
 
         if (TestB == true)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (controlF == true)
             {
-                controlF = false;
-                encount = 0;
-                TestB = false;
-                Battle();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    controlF = false;
+                    encount = 0;
+                    TestB = false;
+                    Battle();
+                }
             }
+            
         }
 
-        Debug.Log($"encount:{encount}");
+        //Debug.Log($"encount:{encount}");
     }
 
     void Encount()
@@ -201,6 +215,8 @@ public class Script_PlayerController : MonoBehaviour
 
     void Battle()
     {
+        FieldMusic.mute = true;
+        ForBattleMusic.Play();
         controlF = false;
         PlayerAnimator.SetBool("runF", false);
         BattleCanvas.SetActive(true);

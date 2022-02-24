@@ -31,6 +31,7 @@ public class CommandPhase : PhaseBase
             }
             battleContext.enemy.hp -= battleContext.player.RandomAttackPoint;
             battleContext.player.PlayAttackAnimator();
+            battleContext.player2.CuttingSound.Play();
             if (battleContext.player.SpeedF == true)
             {
                 battleContext.player.CountTimer = 1;

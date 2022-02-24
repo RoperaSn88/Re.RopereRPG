@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Ladder
   - TestB
+  - BossB
   layers:
   - Default
   - TransparentFX

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: "\u30D0\u30C3\u30D5\u30FC"
   UseMP: 0
+  FightSound: {fileID: 8300000, guid: 3364d02009ec16842ac70f4733da55be, type: 3}
   Target: 0
   CoolTime: 5

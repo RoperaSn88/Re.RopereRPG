@@ -19,7 +19,7 @@ public class Tutorial : MonoBehaviour
         {
             Images[number].SetActive(true);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X));
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 if (number == 0)
                 {
@@ -33,9 +33,9 @@ public class Tutorial : MonoBehaviour
 
             }
             
-            if (Input.GetKeyUp(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                if (number == 8)
+                if (number == Images.Count-1)
                 {
                     End = true;
                 }
@@ -49,7 +49,7 @@ public class Tutorial : MonoBehaviour
         }
         Images[number].SetActive(false);
 
-        Debug.Log("asasa");
+        //Debug.Log("asasa");
         yield break;
     }
 }

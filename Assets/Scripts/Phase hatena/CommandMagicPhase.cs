@@ -17,9 +17,12 @@ public class CommandMagicPhase : PhaseBase
             int currentID = battleContext.windowMagicCommand.currentID;
             //選択したコマンドの設定
             battleContext.player.SelectCommand = battleContext.player.commands[currentID];
+            //battleContext.player.SelectCommand.FightingSound.
             //Targetの設定
             battleContext.player.SetTarget();
             battleContext.player.SelectCommand.Execute(battleContext.player, battleContext.player.target,battleContext.windowLog);
+            battleContext.player2.MagicSound.clip = battleContext.player.SelectCommand.FightSound;
+            battleContext.player2.MagicSound.Play();
             next = new ExecutePhase();
             battleContext.windowMagicCommand.gameObject.SetActive(false);
         }

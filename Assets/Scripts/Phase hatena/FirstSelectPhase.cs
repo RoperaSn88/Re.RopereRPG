@@ -10,9 +10,11 @@ public class FirstSelectPhase : PhaseBase
         int currentID = battleContext.windowFirstCommand.currentID;
         if (currentID == 0)
         {
+            battleContext.player2.ForBattleMusic.Stop();
+            battleContext.player2.FightingMusic.Play();
             battleContext.Battle.PlayAnimation();
-            yield return new WaitForSeconds(1.5f);
             next = new CommandPhase();
+            yield return new WaitForSeconds(1.5f);
             battleContext.enemy.StartTimer();
             battleContext.windowFirstCommand.gameObject.SetActive(false);
             battleContext.windowBattleCommand.Open();
@@ -24,8 +26,9 @@ public class FirstSelectPhase : PhaseBase
             {
                 battleContext.enemy.gameObject.SetActive(false);
                 battleContext.windowLog.ShowLog("ì¶Ç∞ÇÈÇÃÇ…ê¨å˜ÇµÇΩ");
-                yield return new WaitForSeconds(2);
                 battleContext.Ran = true;
+                yield return new WaitForSeconds(2);
+               
                 next = new EndPhase();
             }
             else

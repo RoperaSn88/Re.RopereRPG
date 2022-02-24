@@ -11,8 +11,13 @@ public class Script_HealcommandSO : Script_commandSO
     public override void Execute(ForBattleDate user, ForBattleDate target,WindowLog Log)
     {
         target.hp += HealPoint;
+        if (target.hp >= target.hpmax)
+        {
+            target.hp = target.hpmax;
+        }
         user.CountTimer = CoolTime;
         Log.ShowLog($"{user.name}‚ÌHP‚ª{HealPoint}‰ñ•œ‚µ‚½");
         user.SetHP();
+        user.PlayerHPText.text = $"{user.hp}/{user.hpmax}";
     }
 }
